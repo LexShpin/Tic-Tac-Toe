@@ -11,11 +11,17 @@ const Player = option => {
 }
 
 const gameBoard = (function() {
-    const board = []
+    const board = ['X', 'O']
     const _player1 = Player('X')
     const _player2 = Player('O')
 
     let _activePlayer = 'player_1'
+
+    board.forEach(option => {
+        for (let i = 0; i < gameFields.length; i++) {
+            gameFields[i].textContent = option
+        }
+    })
 
     gameFields.forEach(field => field.addEventListener('click', (e) => {
         if (field.textContent != '') {
