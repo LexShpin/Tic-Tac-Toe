@@ -11,45 +11,53 @@ const Player = option => {
 }
 
 const gameBoard = (function() {
-    const board = ['X', 'O']
+    let _board = []
     const _player1 = Player('X')
     const _player2 = Player('O')
-
     let _activePlayer = 'player_1'
 
-    board.forEach(option => {
+    const updateBoard = () => {
         for (let i = 0; i < gameFields.length; i++) {
-            gameFields[i].textContent = option
+            gameFields[i].textContent = _board[i]
         }
-    })
+    }
 
     gameFields.forEach(field => field.addEventListener('click', (e) => {
         if (field.textContent != '') {
             return
         }
 
+        let currentKey = e.target.getAttribute('data-number')
+
         if (_activePlayer == 'player_1') {
-            field.textContent = _player1.getOption()
-            board.push(_player1.getOption())
+            _board[currentKey - 1] = _player1.getOption()
+            updateBoard()
             _activePlayer = 'player_2'
         } else if (_activePlayer == 'player_2') {
-            field.textContent = _player2.getOption()
-            board.push(_player2.getOption())
+            _board[currentKey - 1] = _player2.getOption()
+            updateBoard()
             _activePlayer = 'player_1'
         }
     }))
 
-    console.log(board)
+    const resetActivePlayer = () => {
+        _activePlayer = 'player_1'
+    }
 
-    return {board}
+    const resetBoard = () => {
+        _board.length = 0
+    }
+
+    return {updateBoard, resetActivePlayer, resetBoard}
 })()
 
 const displayController = (function() {
     const _playAgainBtn = document.querySelector('.play-again-btn')
 
     _playAgainBtn.addEventListener('click', () => {
-        gameFields.forEach(field => field.textContent = '')
-        gameBoard.board = []
+        gameBoard.resetBoard()
+        gameBoard.updateBoard()
+        gameBoard.resetActivePlayer()
     })
 
     return {}
