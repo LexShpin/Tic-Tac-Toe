@@ -11,35 +11,40 @@ const Player = option => {
 }
 
 const gameBoard = (function() {
-    let _board = []
+    const board = []
     const _player1 = Player('X')
     const _player2 = Player('O')
 
-    let activePlayer = 'player_1'
+    let _activePlayer = 'player_1'
 
     gameFields.forEach(field => field.addEventListener('click', (e) => {
         if (field.textContent != '') {
             return
         }
 
-        if (activePlayer == 'player_1') {
+        if (_activePlayer == 'player_1') {
             field.textContent = _player1.getOption()
-            _board.push(_player1.getOption())
-            activePlayer = 'player_2'
-        } else if (activePlayer == 'player_2') {
+            board.push(_player1.getOption())
+            _activePlayer = 'player_2'
+        } else if (_activePlayer == 'player_2') {
             field.textContent = _player2.getOption()
-            _board.push(_player2.getOption())
-            activePlayer = 'player_1'
+            board.push(_player2.getOption())
+            _activePlayer = 'player_1'
         }
-
-        console.log(_board)
     }))
 
-    return {}
+    console.log(board)
+
+    return {board}
 })()
 
 const displayController = (function() {
-    
+    const _playAgainBtn = document.querySelector('.play-again-btn')
+
+    _playAgainBtn.addEventListener('click', () => {
+        gameFields.forEach(field => field.textContent = '')
+        gameBoard.board = []
+    })
 
     return {}
 })()

@@ -1,6 +1,6 @@
 .game-board {
     width: 250px;
-    height: 350px;
+    height: 170px;
     display: flex;
 }
 
@@ -14,4 +14,8 @@
     align-items: center;
     font-size: 24px;
     font-weight: bold;
+}
+
+.play-again-btn {
+    cursor: pointer;
 }
