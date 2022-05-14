@@ -1,4 +1,5 @@
 const gameFields = document.querySelectorAll('.board-cell')
+const winner = document.querySelector('.winner')
 
 const Player = option => {
     this.option = option
@@ -16,12 +17,16 @@ const gameBoard = (function() {
     const _player2 = Player('O')
     let _activePlayer = 'player_1'
 
+    // Update the board in the HTML
     const updateBoard = () => {
         for (let i = 0; i < gameFields.length; i++) {
             gameFields[i].textContent = _board[i]
         }
+
+        displayController.checkForWinner(_board)
     }
 
+    // Players go in turns
     gameFields.forEach(field => field.addEventListener('click', (e) => {
         if (field.textContent != '') {
             return
@@ -40,26 +45,54 @@ const gameBoard = (function() {
         }
     }))
 
+    // Reset the active player to player_1
     const resetActivePlayer = () => {
         _activePlayer = 'player_1'
     }
 
+    // Reset the board
     const resetBoard = () => {
         _board.length = 0
     }
 
-    return {updateBoard, resetActivePlayer, resetBoard}
+    const getBoard = () => {
+        return _board
+    }
+
+    return {updateBoard, resetActivePlayer, resetBoard, getBoard}
 })()
 
 const displayController = (function() {
     const _playAgainBtn = document.querySelector('.play-again-btn')
 
+    // Resetting the game
     _playAgainBtn.addEventListener('click', () => {
         gameBoard.resetBoard()
         gameBoard.updateBoard()
         gameBoard.resetActivePlayer()
+        winner.textContent = ''
     })
 
-    return {}
+    // Defining a winner
+    const checkForWinner = board => {
+        const winningCombinations = [
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8]
+        ]
+
+
+        if (board[0] == 'X' && board[3] == 'X' && board[6] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+        if (board[1] == 'X' && board[4] == 'X' && board[7] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+        if (board[2] == 'X' && board[5] == 'X' && board[8] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+    }
+
+    return {checkForWinner}
 })()
 
