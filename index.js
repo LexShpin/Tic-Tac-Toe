@@ -81,7 +81,7 @@ const displayController = (function() {
             [2, 5, 8]
         ]
 
-
+        // Horizontal player X
         if (board[0] == 'X' && board[3] == 'X' && board[6] == 'X') {
             winner.textContent = 'Player 1 wins!'
         }
@@ -89,6 +89,17 @@ const displayController = (function() {
             winner.textContent = 'Player 1 wins!'
         }
         if (board[2] == 'X' && board[5] == 'X' && board[8] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+
+        // Vertical player X
+        if (board[0] == 'X' && board[1] == 'X' && board[2] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+        if (board[3] == 'X' && board[4] == 'X' && board[5] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+        if (board[6] == 'X' && board[7] == 'X' && board[8] == 'X') {
             winner.textContent = 'Player 1 wins!'
         }
     }
