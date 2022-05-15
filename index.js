@@ -55,11 +55,7 @@ const gameBoard = (function() {
         _board.length = 0
     }
 
-    const getBoard = () => {
-        return _board
-    }
-
-    return {updateBoard, resetActivePlayer, resetBoard, getBoard}
+    return {updateBoard, resetActivePlayer, resetBoard}
 })()
 
 const displayController = (function() {
@@ -71,6 +67,7 @@ const displayController = (function() {
         gameBoard.updateBoard()
         gameBoard.resetActivePlayer()
         winner.textContent = ''
+        gameFields.forEach(field => field.style.pointerEvents = 'auto')
     })
 
     // Defining a winner
@@ -137,8 +134,13 @@ const displayController = (function() {
         }
 
         // Check for draw
-        if (board.length == 9 && winner.textContent == '') {
+        if (board.length == 9 && !board.includes(undefined)) {
             winner.textContent = 'Draw!'
+        }
+
+        // Stop the game if the winner is defined
+        if (winner.textContent != '') {
+            gameFields.forEach(field => field.style.pointerEvents = 'none')
         }
     }
 
