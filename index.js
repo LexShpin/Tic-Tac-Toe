@@ -75,13 +75,8 @@ const displayController = (function() {
 
     // Defining a winner
     const checkForWinner = board => {
-        const winningCombinations = [
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8]
-        ]
 
-        // Horizontal player X
+        // // Horizontal player X
         if (board[0] == 'X' && board[3] == 'X' && board[6] == 'X') {
             winner.textContent = 'Player 1 wins!'
         }
@@ -101,6 +96,49 @@ const displayController = (function() {
         }
         if (board[6] == 'X' && board[7] == 'X' && board[8] == 'X') {
             winner.textContent = 'Player 1 wins!'
+        }
+
+        // Diagonal player X
+        if (board[0] == 'X' && board[4] == 'X' && board[8] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+        if (board[2] == 'X' && board[4] == 'X' && board[6] == 'X') {
+            winner.textContent = 'Player 1 wins!'
+        }
+
+         // // Horizontal player O
+         if (board[0] == 'O' && board[3] == 'O' && board[6] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+        if (board[1] == 'O' && board[4] == 'O' && board[7] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+        if (board[2] == 'O' && board[5] == 'O' && board[8] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+
+        // Vertical player O
+        if (board[0] == 'O' && board[1] == 'O' && board[2] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+        if (board[3] == 'O' && board[4] == 'O' && board[5] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+        if (board[6] == 'O' && board[7] == 'O' && board[8] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+
+        // Diagonal player O
+        if (board[0] == 'O' && board[4] == 'O' && board[8] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+        if (board[2] == 'O' && board[4] == 'O' && board[6] == 'O') {
+            winner.textContent = 'Player 2 wins!'
+        }
+
+        // Check for draw
+        if (board.length == 9 && winner.textContent == '') {
+            winner.textContent = 'Draw!'
         }
     }
 
